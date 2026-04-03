@@ -23,7 +23,10 @@ export function TransactionModal({ isOpen, onClose, transaction }: TransactionMo
     type: transaction?.type || 'expense',
   });
 
-  const categories = ['Food', 'Rent', 'Salary', 'Entertainment', 'Housing', 'Side Hustle', 'Other'];
+  const expenseCategories = ['Food', 'Rent', 'Entertainment', 'Housing', 'Utilities', 'Other'];
+  const incomeCategories = ['Salary', 'Side Hustle', 'Freelance', 'Bonus', 'Investment', 'Other'];
+  
+  const categories = formData.type === 'income' ? incomeCategories : expenseCategories;
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -93,7 +96,11 @@ export function TransactionModal({ isOpen, onClose, transaction }: TransactionMo
               <select 
                 className="flex h-10 w-full  border-2 border-border bg-background px-3 py-2 text-sm shadow-neo focus-visible:outline-none focus-visible:ring-0 disabled:cursor-not-allowed disabled:opacity-50"
                 value={formData.type}
-                onChange={e => setFormData({...formData, type: e.target.value as 'income' | 'expense'})}
+                onChange={e => {
+                  const newType = e.target.value as 'income' | 'expense';
+                  const newCategories = newType === 'income' ? incomeCategories : expenseCategories;
+                  setFormData({...formData, type: newType, category: newCategories[0]});
+                }}
               >
                 <option value="expense">Expense</option>
                 <option value="income">Income</option>

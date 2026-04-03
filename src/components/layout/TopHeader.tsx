@@ -48,7 +48,7 @@ export const TopHeader = () => {
 
       <div className="flex items-center gap-4">
         {/* Export Action */}
-        <Button variant="secondary" size="sm" onClick={handleExport} className="hidden sm:flex">
+        <Button className="hidden sm:flex bg-black hover:bg-neutral-800 dark:bg-white dark:hover:bg-neutral-200 text-white dark:text-black font-black border-2 border-border shadow-neo-sm" size="sm" onClick={handleExport}>
           <Download size={18} />
           Export CSV
         </Button>

@@ -37,10 +37,6 @@ export const Sidebar = () => {
           );
         })}
       </nav>
-      
-      <div className="p-6 border-t-2 border-border text-sm font-bold text-muted-foreground text-center">
-        v1.0 (CSR Mode)
-      </div>
     </aside>
   );
 };

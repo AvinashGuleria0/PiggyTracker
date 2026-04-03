@@ -82,7 +82,7 @@ export function TransactionTable() {
                   </td>
                   {user?.role === 'admin' && (
                      <td className="px-6 py-4 text-right flex justify-end gap-2">
-                       <Button size="icon" variant="outline" className="h-8 w-8 text-black" onClick={() => setEditingTransaction(t)}>
+                       <Button size="icon" variant="outline" className="h-8 w-8 text-black dark:text-white dark:bg-neutral-700 dark:hover:bg-neutral-600 dark:border-neutral-500" onClick={() => setEditingTransaction(t)}>
                          <Edit className="h-4 w-4" />
                        </Button>
                        <Button size="icon" variant="destructive" className="h-8 w-8 bg-red-400 text-black border-border" onClick={() => handleDelete(t.id)}>
