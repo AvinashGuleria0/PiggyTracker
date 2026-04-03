@@ -1,73 +1,42 @@
-# React + TypeScript + Vite
+# PiggyTracker
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+PiggyTracker is a modern, Neo-Brutalism styled internal dashboard for personal finance tracking. Built as a Client-Side SPA using React 18, Vite, and Zustand, it serves as a lightweight system for logging, reviewing, and analyzing financial transactions without needing a backend.
 
-Currently, two official plugins are available:
+## Features
+- **Neo-Brutalist Theme:** Hard shadows, thick dark borders, stark transitions, and high-contrast color palettes.
+- **Client-Side Storage**: Everything persists in your browser's LocalStorage instantly via Zustand.
+- **Overview Dashboard**: Quick card overviews, recent transactions log, and an interactive Area Chart tracking your cumulative balance timeline.
+- **Transactions Hub**: Add, edit, or delete transactions. Includes deep filtering (Type, Category, Date, and text Search) and a mock CSV export utility.
+- **Financial Insights**: Pie and Bar charts generated directly from your transaction store giving you a breakdown of spending categories and a monthly cash-flow comparison.
+- **Role-Based Views**: Mocked login simulating two users (`admin` & `viewer`). Admin can edit/add/delete transactions, while viewers can only review the data.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Technology Stack
+- **React 18** under **Vite** for fast, optimized compilation.
+- **Tailwind CSS v4** + heavily modified **shadcn/ui** for styling and CSS variables.
+- **Zustand** for state management (`persist` middleware to `localStorage`).
+- **Recharts** for SVG-based reactive charting.
+- **Lucide React** & **Dicebear** for icons and avatars.
+- **React-Toastify** for alerts and UI notifications.
 
-## React Compiler
+## Requirements
+Ensure you have **Node.js** (>= 20) and **npm** installed on your system.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Setup & Running
+1. **Clone the repository.**
+2. **Install dependencies**.
+   ```bash
+   npm install
+   ```
+3. **Start the local development server.**
+   ```bash
+   npm run dev
+   ```
+4. Access the web app at `http://localhost:5173`. 
 
-## Expanding the ESLint configuration
+## Development Guidelines
+- The app utilizes strict TypeScript declarations (`import type { Transaction }`). Ensure imports cleanly separate types from values to prevent Vite compilation issues.
+- All styles strictly follow the Neo-Brutalist aesthetic. Do not use soft box-shadows. Shadows should be exact properties such as: `shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]`.
+- The `useAppStore.ts` file acts as the primary database handler and auth handler.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## License
+MIT License.

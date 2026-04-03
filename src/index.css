@@ -2,12 +2,14 @@
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 @import "@fontsource-variable/geist";
+@import "@fontsource/archivo-black";
 
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
     --font-heading: var(--font-sans);
     --font-sans: 'Geist Variable', sans-serif;
+    --font-display: 'Archivo Black', system-ui, sans-serif;
     --color-sidebar-ring: var(--sidebar-ring);
     --color-sidebar-border: var(--sidebar-border);
     --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -49,82 +51,100 @@
 }
 
 :root {
-    --background: oklch(1 0 0);
-    --foreground: oklch(0.145 0 0);
-    --card: oklch(1 0 0);
-    --card-foreground: oklch(0.145 0 0);
+    --background: oklch(0.99 0 0); /* Clean modern white */
+    --foreground: oklch(0.15 0 0); /* Dark grey text */
+    --card: oklch(1 0 0); /* White cards */
+    --card-foreground: oklch(0.15 0 0);
     --popover: oklch(1 0 0);
-    --popover-foreground: oklch(0.145 0 0);
-    --primary: oklch(0.205 0 0);
-    --primary-foreground: oklch(0.985 0 0);
-    --secondary: oklch(0.97 0 0);
-    --secondary-foreground: oklch(0.205 0 0);
-    --muted: oklch(0.97 0 0);
-    --muted-foreground: oklch(0.556 0 0);
-    --accent: oklch(0.97 0 0);
-    --accent-foreground: oklch(0.205 0 0);
-    --destructive: oklch(0.577 0.245 27.325);
-    --border: oklch(0.922 0 0);
-    --input: oklch(0.922 0 0);
-    --ring: oklch(0.708 0 0);
-    --chart-1: oklch(0.87 0 0);
-    --chart-2: oklch(0.556 0 0);
-    --chart-3: oklch(0.439 0 0);
-    --chart-4: oklch(0.371 0 0);
-    --chart-5: oklch(0.269 0 0);
-    --radius: 0.625rem;
-    --sidebar: oklch(0.985 0 0);
-    --sidebar-foreground: oklch(0.145 0 0);
-    --sidebar-primary: oklch(0.205 0 0);
-    --sidebar-primary-foreground: oklch(0.985 0 0);
-    --sidebar-accent: oklch(0.97 0 0);
-    --sidebar-accent-foreground: oklch(0.205 0 0);
-    --sidebar-border: oklch(0.922 0 0);
-    --sidebar-ring: oklch(0.708 0 0);
+    --popover-foreground: oklch(0.15 0 0);
+    --primary: oklch(0.20 0 0); /* Near Black */
+    --primary-foreground: oklch(0.98 0 0);
+    --secondary: oklch(0.85 0.05 240); /* Soft blue accent */
+    --secondary-foreground: oklch(0.15 0 0);
+    --muted: oklch(0.95 0 0);
+    --muted-foreground: oklch(0.45 0 0);
+    --accent: oklch(0.92 0.05 180); /* Soft cyan/teal highlight */
+    --accent-foreground: oklch(0.15 0 0);
+    --destructive: oklch(0.70 0.15 25); /* Softer salmon red */
+    --destructive-foreground: oklch(0.98 0 0);
+    --border: oklch(0.10 0 0); /* Still dark border for definition */
+    --input: oklch(0.15 0 0);
+    --ring: oklch(0.15 0 0);
+    --radius: 0.75rem; /* Clean rounded corners matching the UI */
+    
+    /* Chart Colors - Pastel/Softer theme */
+    --chart-1: oklch(0.82 0.08 240); /* Soft Blue */
+    --chart-2: oklch(0.85 0.10 150); /* Soft Mint/Teal */
+    --chart-3: oklch(0.88 0.12 70);  /* Soft Orange/Peach */
+    --chart-4: oklch(0.92 0.10 100); /* Soft Yellow */
+    --chart-5: oklch(0.82 0.10 340); /* Soft Pink/Purple */
 }
 
 .dark {
-    --background: oklch(0.145 0 0);
-    --foreground: oklch(0.985 0 0);
-    --card: oklch(0.205 0 0);
-    --card-foreground: oklch(0.985 0 0);
-    --popover: oklch(0.205 0 0);
-    --popover-foreground: oklch(0.985 0 0);
-    --primary: oklch(0.922 0 0);
-    --primary-foreground: oklch(0.205 0 0);
-    --secondary: oklch(0.269 0 0);
-    --secondary-foreground: oklch(0.985 0 0);
-    --muted: oklch(0.269 0 0);
-    --muted-foreground: oklch(0.708 0 0);
-    --accent: oklch(0.269 0 0);
-    --accent-foreground: oklch(0.985 0 0);
-    --destructive: oklch(0.704 0.191 22.216);
-    --border: oklch(1 0 0 / 10%);
-    --input: oklch(1 0 0 / 15%);
-    --ring: oklch(0.556 0 0);
-    --chart-1: oklch(0.87 0 0);
-    --chart-2: oklch(0.556 0 0);
-    --chart-3: oklch(0.439 0 0);
-    --chart-4: oklch(0.371 0 0);
-    --chart-5: oklch(0.269 0 0);
-    --sidebar: oklch(0.205 0 0);
-    --sidebar-foreground: oklch(0.985 0 0);
-    --sidebar-primary: oklch(0.488 0.243 264.376);
-    --sidebar-primary-foreground: oklch(0.985 0 0);
-    --sidebar-accent: oklch(0.269 0 0);
-    --sidebar-accent-foreground: oklch(0.985 0 0);
-    --sidebar-border: oklch(1 0 0 / 10%);
-    --sidebar-ring: oklch(0.556 0 0);
+  --background: oklch(0.20 0.01 260); /* Softer charcoal with subtle cool tint */
+    --foreground: oklch(0.95 0 0); /* Light text #F0F0F0 */
+  --card: oklch(0.24 0.01 260); /* Slightly elevated panel tone */
+    --card-foreground: oklch(0.95 0 0);
+  --popover: oklch(0.24 0.01 260);
+    --popover-foreground: oklch(0.95 0 0);
+    --primary: oklch(0.95 0 0);
+    --primary-foreground: oklch(0.10 0 0);
+    --secondary: oklch(0.35 0.05 240); /* Deeper blue accent */
+    --secondary-foreground: oklch(0.95 0 0);
+  --muted: oklch(0.28 0.01 260);
+    --muted-foreground: oklch(0.75 0 0);
+    --accent: oklch(0.35 0.08 180); /* Deeper cyan */
+    --accent-foreground: oklch(0.95 0 0);
+    --destructive: oklch(0.60 0.18 20); /* Darker red */
+    --destructive-foreground: oklch(0.95 0 0);
+  --border: oklch(0.36 0.01 260); /* Soft cool borders */
+  --input: oklch(0.36 0.01 260);
+  --ring: oklch(0.36 0.01 260);
 }
 
 @layer base {
   * {
-    @apply border-border outline-ring/50;
+    @apply outline-ring/50;
     }
   body {
-    @apply bg-background text-foreground;
-    }
+    @apply bg-background text-foreground tracking-tight;
+  }
   html {
     @apply font-sans;
-    }
+  }
+
+  ::selection {
+    background: #d8b4fe;
+    color: #111827;
+    text-shadow: none;
+  }
+
+  .dark ::selection {
+    background: #7c3aed;
+    color: #f8fafc;
+    text-shadow: none;
+  }
+}
+
+@layer utilities {
+  .shadow-neo {
+    box-shadow: 4px 4px 0px 0px rgba(0, 0, 0, 1);
+  }
+  .shadow-neo-text {
+    -webkit-text-stroke: 1.5px #111827;
+    text-shadow: 2px 2px 0px #111827;
+  }
+  .dark .shadow-neo {
+    box-shadow: 4px 4px 0px 0px rgba(255, 255, 255, 0.4);
+  }
+  .dark .shadow-neo-text {
+    -webkit-text-stroke: 1.5px #000000;
+    text-shadow: 2px 2px 0px #000000;
+  }
+  .shadow-neo-sm {
+    box-shadow: 2px 2px 0px 0px rgba(0, 0, 0, 1);
+  }
+  .dark .shadow-neo-sm {
+    box-shadow: 2px 2px 0px 0px rgba(255, 255, 255, 0.4);
+  }
 }
