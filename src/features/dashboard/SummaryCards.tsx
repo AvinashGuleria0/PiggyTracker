@@ -1,4 +1,3 @@
-import React from 'react';
 import { ArrowUpCircle, ArrowDownCircle, Wallet } from 'lucide-react';
 import { NeoCard } from '@/components/shared/NeoCard';
 import { useAppStore } from '@/store/useAppStore';

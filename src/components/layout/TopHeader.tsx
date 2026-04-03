@@ -1,6 +1,5 @@
-import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { Download, Moon, Sun, User, LogOut, ShieldAlert, ShieldCheck } from 'lucide-react';
+import { Download, Moon, Sun, LogOut, ShieldAlert, ShieldCheck, Menu } from 'lucide-react';
 import { useAppStore } from '@/store/useAppStore';
 import { useTheme } from '@/components/providers/ThemeProvider';
 import { Button } from '@/components/ui/button';
@@ -15,7 +14,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
-export const TopHeader = () => {
+export const TopHeader = ({ onOpenMenu }: { onOpenMenu?: () => void }) => {
   const { user, transactions, switchRole, logout } = useAppStore();
   const { theme, setTheme } = useTheme();
   const location = useLocation();
@@ -41,22 +40,35 @@ export const TopHeader = () => {
   const getDicebearUrl = (seed: string) => `https://api.dicebear.com/7.x/notionists/svg?seed=${seed}&backgroundColor=b6e3f4,c0aede,d1d4f9,ffdfbf,ffd5dc`;
 
   return (
-    <header className="h-20 border-b-2 border-border bg-card flex items-center justify-between px-6 shadow-neo z-10 sticky top-0">
-      <div className="flex items-center">
-        <h2 className="text-3xl font-black tracking-tight">{currentPage}</h2>
+    <header className="h-16 md:h-20 border-b-2 border-border bg-card flex items-center justify-between px-4 md:px-6 shadow-neo z-10 sticky top-0 shrink-0">
+      <div className="flex items-center gap-3">
+        {/* Mobile Menu Icon */}
+        <Button 
+          variant="outline" 
+          size="icon" 
+          className="md:hidden border-2 border-border shadow-neo-sm h-10 w-10 shrink-0" 
+          onClick={onOpenMenu}
+        >
+          <Menu className="h-5 w-5" />
+        </Button>
+        <h2 className="text-xl md:text-3xl font-black tracking-tight truncate">{currentPage}</h2>
       </div>
 
-      <div className="flex items-center gap-4">
+      <div className="flex items-center gap-2 md:gap-4">
         {/* Export Action */}
         <Button className="hidden sm:flex bg-black hover:bg-neutral-800 dark:bg-white dark:hover:bg-neutral-200 text-white dark:text-black font-black border-2 border-border shadow-neo-sm" size="sm" onClick={handleExport}>
           <Download size={18} />
-          Export CSV
+          <span className="hidden sm:inline ml-1">Export CSV</span>
+        </Button>
+        <Button className="flex sm:hidden bg-black hover:bg-neutral-800 dark:bg-white dark:hover:bg-neutral-200 text-white dark:text-black font-black border-2 border-border shadow-neo-sm h-10 w-10 p-0" onClick={handleExport}>
+          <Download size={18} />
         </Button>
 
         {/* Theme Toggle */}
         <Button 
           variant="outline" 
           size="icon" 
+          className="h-10 w-10 shrink-0 border-2 border-border shadow-neo-sm"
           onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
         >
           {theme === "dark" ? <Sun size={20} /> : <Moon size={20} />}

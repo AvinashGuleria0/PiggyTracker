@@ -1,4 +1,3 @@
-import React from 'react';
 import { NeoCard } from '../NeoCard';
 
 export const InsightsSkeleton = () => {
