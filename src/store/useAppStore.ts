@@ -118,7 +118,13 @@ export const useAppStore = create<AppState>()(
       })),
     }),
     {
-      name: "piggy-tracker-storage", // name of the item in localStorage
+      name: "piggy-tracker-storage",
+      partialize: (state) => ({
+        user: state.user,
+        transactions: state.transactions,
+        filters: state.filters,
+        // isSwitchingRole is NOT persisted - always starts as false
+      }),
     }
   )
 );
