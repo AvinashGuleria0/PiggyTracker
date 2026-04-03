@@ -8,7 +8,7 @@ import App from './App.tsx'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <ThemeProvider defaultTheme="system" storageKey="piggytracker-ui-theme">
+    <ThemeProvider defaultTheme="light" storageKey="piggytracker-ui-theme">
       <App />
       <ToastContainer 
         position="bottom-right"
