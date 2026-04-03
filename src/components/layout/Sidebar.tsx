@@ -1,4 +1,4 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 import { LayoutDashboard, ReceiptText, PieChart } from 'lucide-react';
 import { PiPiggyBankFill, PiPiggyBank } from 'react-icons/pi';
 import { cn } from '@/lib/utils';
@@ -12,10 +12,10 @@ export const Sidebar = () => {
 
   return (
     <aside className="hidden md:flex flex-col w-64 border-r-2 border-border bg-card shadow-neo z-10">
-      <div className="p-6 border-b-2 border-border flex items-center gap-3">
+      <Link to="/" className="p-6 border-b-2 border-border flex items-center gap-3 hover:opacity-80 transition-opacity">
         <PiPiggyBank size={35} className="text-[#E85DA1] dark:text-[#F39AC7] drop-shadow-sm shrink-0" />
         <h1 className="text-[1.70rem] leading-none font-black tracking-tighter text-[#D9468D] dark:text-[#FBCFE8]">PiggyTracker</h1>
-      </div>
+      </Link>
       
       <nav className="flex-1 p-4 space-y-3">
         {navLinks.map((link) => {

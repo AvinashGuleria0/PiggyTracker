@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 import { PiggyBank, TrendingUp, Download, PieChart } from 'lucide-react';
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 import { Button } from '@/components/ui/button';
@@ -6,6 +7,7 @@ import { AuthModal } from '@/features/landing/AuthModal';
 import { NeoCard } from '@/components/shared/NeoCard';
 import { Footer } from '@/components/layout/Footer';
 import { ModeToggle } from '@/components/shared/ModeToggle';
+import { useAppStore } from '@/store/useAppStore';
 
 const features = [
   {
@@ -29,6 +31,9 @@ const features = [
 ];
 
 export default function Landing() {
+  const navigate = useNavigate();
+  const { user } = useAppStore();
+
   return (
     <div className="min-h-screen bg-[#FFFfff] dark:bg-background flex flex-col font-sans overflow-x-hidden transition-colors duration-300">
       {/* Header */}
@@ -39,9 +44,18 @@ export default function Landing() {
         </div>
         <div className="flex items-center gap-4">
           <ModeToggle />
-          <AuthModal>
-            <Button variant="outline" className="font-black px-8 border-2 border-border bg-card hover:bg-neutral-100 dark:hover:bg-neutral-800 uppercase tracking-widest">Login</Button>
-          </AuthModal>
+          {user ? (
+            <Button 
+              onClick={() => navigate('/dashboard/overview')}
+              className="font-black px-8 border-2 border-border bg-[#3F6FE6] text-white hover:bg-[#335ECC] uppercase tracking-widest"
+            >
+              Go to Dashboard
+            </Button>
+          ) : (
+            <AuthModal>
+              <Button variant="outline" className="font-black px-8 border-2 border-border bg-card hover:bg-neutral-100 dark:hover:bg-neutral-800 uppercase tracking-widest">Login</Button>
+            </AuthModal>
+          )}
         </div>
       </header>
 
@@ -75,11 +89,21 @@ export default function Landing() {
                 transition={{ delay: 0.2 }}
                 className="mt-4 flex flex-col sm:flex-row gap-4 w-full sm:w-auto"
               >
-                <AuthModal>
-                  <Button size="lg" className="h-16 px-10 text-xl font-black bg-[#3F6FE6] dark:bg-[#3F5D80] text-white hover:bg-[#335ECC] dark:hover:bg-[#4C6F99] w-full sm:w-64 shadow-neo active:shadow-none border-2 border-border transition-all">
-                    Get Started Now
+                {user ? (
+                  <Button 
+                    onClick={() => navigate('/dashboard/overview')}
+                    size="lg" 
+                    className="h-16 px-10 text-xl font-black bg-[#3F6FE6] dark:bg-[#3F5D80] text-white hover:bg-[#335ECC] dark:hover:bg-[#4C6F99] w-full sm:w-64 shadow-neo active:shadow-none border-2 border-border transition-all"
+                  >
+                    Go to Dashboard
                   </Button>
-                </AuthModal>
+                ) : (
+                  <AuthModal>
+                    <Button size="lg" className="h-16 px-10 text-xl font-black bg-[#3F6FE6] dark:bg-[#3F5D80] text-white hover:bg-[#335ECC] dark:hover:bg-[#4C6F99] w-full sm:w-64 shadow-neo active:shadow-none border-2 border-border transition-all">
+                      Get Started Now
+                    </Button>
+                  </AuthModal>
+                )}
                 <Button variant="outline" size="lg" className="h-16 px-10 text-xl font-black bg-card hover:bg-[#A8E6CF] dark:hover:bg-[#2f4c49] hover:text-black dark:hover:text-[#d7f7f0] text-black dark:text-neutral-100 border-2 border-border shadow-neo active:shadow-none transition-all w-full sm:w-64">
                   Learn More
                 </Button>
