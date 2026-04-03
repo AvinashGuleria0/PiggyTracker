@@ -82,7 +82,7 @@ export const BalanceChart = () => {
                     color: 'var(--card-foreground)'
                   }}
                   itemStyle={{ color: trendColor }}
-                  formatter={(value: number) => [formatCurrency(value), 'Balance']}
+                  formatter={(value) => [formatCurrency(value as number), 'Balance']}
                   labelStyle={{ color: 'var(--muted-foreground)', marginBottom: '5px' }}
                 />
                 <Area 

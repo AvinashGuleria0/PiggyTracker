@@ -37,23 +37,24 @@ export default function Landing() {
   return (
     <div className="min-h-screen bg-[#FFFfff] dark:bg-background flex flex-col font-sans overflow-x-hidden transition-colors duration-300">
       {/* Header */}
-      <header className="p-6 flex justify-between items-center border-b-2 border-border bg-card z-10">
-        <div className="flex items-center gap-3">
-          <PiggyBank size={40} className="text-foreground fill-[#FF7eb9] dark:fill-[#7dd9cc]" />
-          <span className="text-3xl font-display tracking-tighter text-foreground">PiggyTracker</span>
+      <header className="p-4 md:p-6 flex justify-between items-center border-b-2 border-border bg-card z-10">
+        <div className="flex items-center gap-2 md:gap-3">
+          <PiggyBank className="w-8 h-8 md:w-10 md:h-10 text-foreground fill-[#FF7eb9] dark:fill-[#7dd9cc] shrink-0" />
+          <span className="text-xl md:text-3xl font-display tracking-tighter text-foreground truncate">PiggyTracker</span>
         </div>
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-2 md:gap-4">
           <ModeToggle />
           {user ? (
             <Button 
               onClick={() => navigate('/dashboard/overview')}
-              className="font-black px-8 border-2 border-border bg-[#3F6FE6] text-white hover:bg-[#335ECC] uppercase tracking-widest"
+              className="font-black px-4 md:px-8 border-2 border-border bg-[#3F6FE6] text-white hover:bg-[#335ECC] uppercase tracking-widest text-xs md:text-sm"
             >
-              Go to Dashboard
+              <span className="hidden sm:inline">Go to Dashboard</span>
+              <span className="sm:hidden">App</span>
             </Button>
           ) : (
             <AuthModal>
-              <Button variant="outline" className="font-black px-8 border-2 border-border bg-card hover:bg-neutral-100 dark:hover:bg-neutral-800 uppercase tracking-widest">Login</Button>
+              <Button variant="outline" className="font-black px-4 md:px-8 border-2 border-border bg-card hover:bg-neutral-100 dark:hover:bg-neutral-800 uppercase tracking-widest text-xs md:text-sm">Login</Button>
             </AuthModal>
           )}
         </div>

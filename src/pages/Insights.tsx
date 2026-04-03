@@ -40,9 +40,9 @@ export default function Insights() {
 
   return (
     <div className="space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
-      <div className="border-b-2 border-border pb-4">
-        <h1 className="text-3xl font-black uppercase tracking-tight">Financial Insights</h1>
-        <p className="text-muted-foreground font-semibold mt-1">
+      <div className="border-b-2 border-border pb-4 w-full">
+        <h1 className="text-2xl sm:text-3xl font-black uppercase tracking-tight">Financial Insights</h1>
+        <p className="text-muted-foreground text-sm sm:text-base font-semibold mt-1">
           A deep dive into your spending and saving habits.
         </p>
       </div>

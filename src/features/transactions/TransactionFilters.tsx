@@ -18,13 +18,13 @@ export function TransactionFilters() {
           placeholder="Search transactions..." 
           value={filters.searchQuery}
           onChange={(e) => setFilters({ searchQuery: e.target.value })}
-          className="text-base font-bold"
+          className="text-base font-bold w-full"
         />
       </div>
       
-      <div className="flex gap-4">
+      <div className="flex flex-wrap sm:flex-nowrap gap-2 sm:gap-4 w-full md:w-auto">
         <select 
-          className="h-11 border-2 border-border bg-card text-foreground px-4 py-2 text-sm font-bold shadow-neo-sm focus-visible:outline-none focus-visible:ring-0 uppercase tracking-wide"
+          className="flex-1 sm:flex-none h-11 border-2 border-border bg-card text-foreground px-2 sm:px-4 py-2 text-xs sm:text-sm font-bold shadow-neo-sm focus-visible:outline-none focus-visible:ring-0 uppercase tracking-wide w-full"
           value={filters.type}
           onChange={(e) => setFilters({ type: e.target.value as any })}
         >
@@ -34,7 +34,7 @@ export function TransactionFilters() {
         </select>
         
         <select 
-          className="h-11 border-2 border-border bg-card text-foreground px-4 py-2 text-sm font-bold shadow-neo-sm focus-visible:outline-none focus-visible:ring-0 uppercase tracking-wide"
+          className="flex-1 sm:flex-none h-11 border-2 border-border bg-card text-foreground px-2 sm:px-4 py-2 text-xs sm:text-sm font-bold shadow-neo-sm focus-visible:outline-none focus-visible:ring-0 uppercase tracking-wide w-full"
           value={filters.category}
           onChange={(e) => setFilters({ category: e.target.value })}
         >
@@ -48,9 +48,9 @@ export function TransactionFilters() {
           <option value="Other">Other</option>
         </select>
         
-        <Button onClick={handleExport} className="gap-2 font-black uppercase tracking-wider shadow-neo-sm border-2 border-border">
+        <Button onClick={handleExport} className="w-full sm:w-auto gap-2 font-black uppercase tracking-wider shadow-neo-sm border-2 border-border mt-2 sm:mt-0 h-11">
           <Download className="w-4 h-4" />
-          Export
+          <span className="inline">Export</span>
         </Button>
       </div>
     </div>
