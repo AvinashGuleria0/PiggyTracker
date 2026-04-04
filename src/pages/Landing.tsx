@@ -8,6 +8,7 @@ import { NeoCard } from '@/components/shared/NeoCard';
 import { Footer } from '@/components/layout/Footer';
 import { ModeToggle } from '@/components/shared/ModeToggle';
 import { useAppStore } from '@/store/useAppStore';
+import { useRef } from 'react';
 
 const features = [
   {
@@ -33,6 +34,11 @@ const features = [
 export default function Landing() {
   const navigate = useNavigate();
   const { user } = useAppStore();
+  const featuresRef = useRef<HTMLElement>(null);
+
+  const handleScrollToFeatures = () => {
+    featuresRef.current?.scrollIntoView({ behavior: 'smooth' });
+  };
 
   return (
     <div className="min-h-screen bg-[#FFFfff] dark:bg-background flex flex-col font-sans overflow-x-hidden transition-colors duration-300">
@@ -105,7 +111,7 @@ export default function Landing() {
                     </Button>
                   </AuthModal>
                 )}
-                <Button variant="outline" size="lg" className="h-16 px-10 text-xl font-black bg-card hover:bg-[#A8E6CF] dark:hover:bg-[#2f4c49] hover:text-black dark:hover:text-[#d7f7f0] text-black dark:text-neutral-100 border-2 border-border shadow-neo active:shadow-none transition-all w-full sm:w-64">
+                <Button variant="outline" size="lg" onClick={handleScrollToFeatures} className="h-16 px-10 text-xl font-black bg-card hover:bg-[#A8E6CF] dark:hover:bg-[#2f4c49] hover:text-black dark:hover:text-[#d7f7f0] text-black dark:text-neutral-100 border-2 border-border shadow-neo active:shadow-none transition-all w-full sm:w-64">
                   Learn More
                 </Button>
               </motion.div>
@@ -130,7 +136,7 @@ export default function Landing() {
         </section>
 
         {/* Features Section */}
-        <section className="w-full bg-card border-y-2 border-border py-32 px-6 md:px-16 relative mt-20 z-10">
+        <section ref={featuresRef} className="w-full bg-card border-y-2 border-border py-32 px-6 md:px-16 relative mt-20 z-10">
           <div className="max-w-[1600px] mx-auto">
             <h2 className="text-5xl md:text-7xl font-black text-center text-foreground mb-24 uppercase drop-shadow-md">What We Do</h2>
             
