@@ -61,7 +61,7 @@ export function MonthlyBarChart() {
           <BarChart data={data} margin={{ top: 10, right: 10, left: 10, bottom: 0 }}>
             <CartesianGrid strokeDasharray="3 3" stroke={gridColor} vertical={false} />
             <XAxis dataKey="month" stroke={axisColor} tick={{ fill: axisColor, fontWeight: 'bold' }} />
-            <YAxis stroke={axisColor} tick={{ fill: axisColor, fontWeight: 'bold' }} tickFormatter={(val) => `$${val}`} />
+            <YAxis stroke={axisColor} tick={{ fill: axisColor, fontWeight: 'bold' }} tickFormatter={(val) => `₹${val}`} width={60} />
             <Tooltip 
               formatter={(value) => [formatCurrency(typeof value === 'number' ? value : Number(value || 0)), '']}
               contentStyle={{

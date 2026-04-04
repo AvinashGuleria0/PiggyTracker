@@ -9,7 +9,7 @@ export default function Overview() {
       initial={{ opacity: 0 }} 
       animate={{ opacity: 1 }} 
       transition={{ duration: 0.3 }}
-      className="space-y-6 md:space-y-8 max-w-7xl mx-auto w-full pb-8 overflow-x-hidden"
+      className="space-y-6 md:space-y-8 max-w-7xl mx-auto w-full pb-8 px-1 md:px-2"
     >
       <section>
         <SummaryCards />

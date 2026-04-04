@@ -15,11 +15,27 @@ interface TransactionModalProps {
 export function TransactionModal({ isOpen, onClose, transaction }: TransactionModalProps) {
   const { addTransaction, updateTransaction } = useAppStore();
   
+  // Helper function to convert UTC ISO string back to datetime-local format (IST)
+  const getDatetimeLocalValue = (isoString?: string) => {
+    if (isoString) {
+      const date = new Date(isoString);
+      // Convert UTC to IST by adding 5:30
+      const istOffsetMs = 5.5 * 60 * 60 * 1000;
+      const istDate = new Date(date.getTime() + istOffsetMs);
+      return istDate.toISOString().slice(0, 16);
+    }
+    // Return current time in IST
+    const now = new Date();
+    const istOffsetMs = 5.5 * 60 * 60 * 1000;
+    const istNow = new Date(now.getTime() + istOffsetMs);
+    return istNow.toISOString().slice(0, 16);
+  };
+  
   const [formData, setFormData] = useState({
     title: transaction?.title || '',
     amount: transaction?.amount || '',
     category: transaction?.category || 'Food',
-    date: transaction?.date || new Date().toISOString().split('T')[0],
+    date: getDatetimeLocalValue(transaction?.date),
     type: transaction?.type || 'expense',
   });
 
@@ -27,11 +43,39 @@ export function TransactionModal({ isOpen, onClose, transaction }: TransactionMo
   const incomeCategories = ['Salary', 'Side Hustle', 'Freelance', 'Bonus', 'Investment', 'Other'];
   
   const categories = formData.type === 'income' ? incomeCategories : expenseCategories;
+  
+  // Get today's datetime in IST for the datetime-local max attribute
+  const getTodayDatetime = () => {
+    const now = new Date();
+    // Convert UTC now to IST by adding 5:30
+    const istOffsetMs = 5.5 * 60 * 60 * 1000;
+    const istNow = new Date(now.getTime() + istOffsetMs);
+    return istNow.toISOString().slice(0, 16);
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    
     if (!formData.title || !formData.amount) {
       toast.error('Title and Amount are required.', { className: 'border-2 border-border shadow-neo' });
+      return;
+    }
+
+    // Parse datetime-local string to UTC properly
+    // datetime-local format: "2026-04-04T15:30"
+    const parts = formData.date.split('T');
+    const [year, month, day] = parts[0].split('-').map(Number);
+    const [hours, minutes] = parts[1].split(':').map(Number);
+    
+    // Create date in IST (by creating UTC date and adjusting)
+    const istDate = new Date(Date.UTC(year, month - 1, day, hours, minutes, 0));
+    // Subtract 5:30 hours to convert IST to UTC
+    const istOffsetMs = 5.5 * 60 * 60 * 1000;
+    const utcDate = new Date(istDate.getTime() - istOffsetMs);
+    
+    // Validate that the datetime is not in the future
+    if (utcDate > new Date()) {
+      toast.error('Cannot add transactions for future dates/times.', { className: 'border-2 border-border shadow-neo' });
       return;
     }
 
@@ -40,7 +84,7 @@ export function TransactionModal({ isOpen, onClose, transaction }: TransactionMo
       title: formData.title,
       amount: Number(formData.amount),
       category: formData.category,
-      date: formData.date,
+      date: utcDate.toISOString(),
       type: formData.type as 'income' | 'expense',
     };
 
@@ -72,7 +116,7 @@ export function TransactionModal({ isOpen, onClose, transaction }: TransactionMo
           </div>
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-2">
-              <label className="text-sm font-bold">Amount ($)</label>
+              <label className="text-sm font-bold">Amount (₹)</label>
               <Input 
                 type="number" 
                 step="0.01"
@@ -82,11 +126,12 @@ export function TransactionModal({ isOpen, onClose, transaction }: TransactionMo
               />
             </div>
             <div className="space-y-2">
-              <label className="text-sm font-bold">Date</label>
+              <label className="text-sm font-bold">Date & Time</label>
               <Input 
-                type="date" 
+                type="datetime-local" 
                 value={formData.date} 
-                onChange={e => setFormData({...formData, date: e.target.value})} 
+                onChange={e => setFormData({...formData, date: e.target.value})}
+                max={getTodayDatetime()}
               />
             </div>
           </div>

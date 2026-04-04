@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { useAppStore } from '@/store/useAppStore';
-import { formatCurrency, formatDate } from '@/utils/formatters';
+import { formatCurrency, formatDateTime } from '@/utils/formatters';
 import { NeoCard } from '@/components/shared/NeoCard';
 import { Badge } from '@/components/ui/badge';
 import { cn } from '@/lib/utils';
@@ -46,24 +46,24 @@ export const RecentTransactions = () => {
               <motion.div 
                 key={tx.id} 
                 variants={itemAnimation}
-                className="flex items-center justify-between bg-background border-2 border-border p-4 shadow-neo-sm hover:-translate-y-1 transition-transform"
+                className="flex items-center justify-between bg-background border-2 border-border p-4 shadow-neo-sm hover:-translate-y-1 transition-transform gap-2"
               >
-                <div className="flex items-center gap-4">
+                <div className="flex items-center gap-3 sm:gap-4 min-w-0">
                   <div className={cn(
-                    "p-2 rounded-full border-2 border-border shadow-neo-sm hidden sm:block",
+                    "p-2 rounded-full border-2 border-border shadow-neo-sm hidden sm:flex items-center justify-center shrink-0",
                     tx.type === 'income' ? 'bg-[#86EFAC] text-black' : 'bg-[#FCA5A5] text-black'
                   )}>
-                    {tx.type === 'income' ? <ArrowUpRight size={20} /> : <ArrowDownRight size={20} />}
+                    {tx.type === 'income' ? <ArrowUpRight size={20} className="shrink-0" /> : <ArrowDownRight size={20} className="shrink-0" />}
                   </div>
-                  <div>
-                     <p className="font-black text-base truncate max-w-[160px] sm:max-w-[200px] leading-tight">{tx.title}</p>
-                     <p className="text-xs text-muted-foreground font-bold mt-1">
-                        {formatDate(tx.date)}
+                  <div className="min-w-0">
+                     <p className="font-black text-base truncate max-w-full leading-tight" title={tx.title}>{tx.title}</p>
+                     <p className="text-xs text-muted-foreground font-bold mt-1 truncate">
+                        {formatDateTime(tx.date)}
                      </p>
                   </div>
                 </div>
 
-                <div className="flex flex-col items-end gap-2">
+                <div className="flex flex-col items-end gap-2 shrink-0 pl-2">
                   <span className={cn(
                     "font-black text-lg tracking-tight",
                     tx.type === 'income' ? 'text-[#059669] dark:text-[#34D399]' : 'text-destructive'

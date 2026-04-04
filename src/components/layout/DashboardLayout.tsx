@@ -11,6 +11,7 @@ export const DashboardLayout = () => {
   const { user, isSwitchingRole } = useAppStore();
   const location = useLocation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
 
   // Route protection - If not logged in, boot out to landing page
   if (!user) {
@@ -38,8 +39,12 @@ export const DashboardLayout = () => {
       )}
       
       {/* Sidebar - responsive classes added */}
-      <div className={`fixed inset-y-0 left-0 z-50 transform ${mobileMenuOpen ? 'translate-x-0' : '-translate-x-full'} transition-transform duration-300 ease-in-out md:relative md:translate-x-0 md:flex flex-col`}>
-        <Sidebar onClose={() => setMobileMenuOpen(false)} />
+      <div className={`fixed inset-y-0 left-0 z-50 transform ${mobileMenuOpen ? 'translate-x-0' : '-translate-x-full'} transition-all duration-300 ease-in-out md:relative md:translate-x-0 md:flex flex-col ${isSidebarCollapsed ? 'md:w-20' : 'md:w-64'}`}>
+        <Sidebar 
+          onClose={() => setMobileMenuOpen(false)} 
+          isCollapsed={isSidebarCollapsed}
+          onToggleCollapse={() => setIsSidebarCollapsed(!isSidebarCollapsed)}
+        />
       </div>
 
       <div className="flex-1 flex flex-col h-screen overflow-hidden w-full">
