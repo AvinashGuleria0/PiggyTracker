@@ -46,7 +46,7 @@ export const TopHeader = ({ onOpenMenu }: { onOpenMenu?: () => void }) => {
         <Button 
           variant="outline" 
           size="icon" 
-          className="md:hidden border-2 border-border shadow-neo-sm h-10 w-10 shrink-0" 
+          className="lg:hidden border-2 border-border shadow-neo-sm h-10 w-10 shrink-0"
           onClick={onOpenMenu}
         >
           <Menu className="h-5 w-5" />

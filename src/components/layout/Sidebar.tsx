@@ -28,7 +28,7 @@ export const Sidebar = ({ onClose, isCollapsed, onToggleCollapse }: SidebarProps
           variant="outline" 
           size="icon" 
           onClick={onClose}
-          className="md:hidden absolute top-4 right-4 h-8 w-8 z-30 border-2 border-border shadow-neo-sm"
+          className="lg:hidden absolute top-4 right-4 h-8 w-8 z-30 border-2 border-border shadow-neo-sm"
         >
           <X className="h-4 w-4" />
         </Button>
@@ -76,7 +76,7 @@ export const Sidebar = ({ onClose, isCollapsed, onToggleCollapse }: SidebarProps
       <div className="p-4 border-t-2 border-border mt-auto flex justify-center">
         <button
           onClick={onToggleCollapse}
-          className="flex items-center justify-center h-12 w-12 border-2 border-border shadow-neo-sm hover:-translate-y-0.5 transition-all bg-background active:shadow-none hover:bg-muted absolute -right-6 bottom-10 z-20"
+          className="hidden lg:flex items-center justify-center h-12 w-12 border-2 border-border shadow-neo-sm hover:-translate-y-0.5 transition-all bg-background active:shadow-none hover:bg-muted absolute -right-6 bottom-10 z-20"
           title={isCollapsed ? "Expand Sidebar" : "Collapse Sidebar"}
         >
           {isCollapsed ? <ChevronRight size={24} /> : <ChevronLeft size={24} />}

@@ -57,7 +57,7 @@ export function MonthlyBarChart() {
     <div className="p-4 border-2 border-border bg-card shadow-neo">
       <h3 className="text-xl font-black mb-4 uppercase">Cash Flow (Monthly)</h3>
       <div className="h-[300px] w-full">
-        <ResponsiveContainer width="100%" height="100%">
+        <ResponsiveContainer width="100%" height="100%" minWidth={0} minHeight={0}>
           <BarChart data={data} margin={{ top: 10, right: 10, left: 10, bottom: 0 }}>
             <CartesianGrid strokeDasharray="3 3" stroke={gridColor} vertical={false} />
             <XAxis dataKey="month" stroke={axisColor} tick={{ fill: axisColor, fontWeight: 'bold' }} />

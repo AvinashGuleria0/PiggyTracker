@@ -13,7 +13,7 @@ export type TransactionCategory = IncomeCategory | ExpenseCategory;
  */
 export function getCategoriesByType(type: 'income' | 'expense' | 'all') {
   if (type === 'all') {
-    return [...TRANSACTION_CATEGORIES.income, ...TRANSACTION_CATEGORIES.expense] as const;
+    return Array.from(new Set([...TRANSACTION_CATEGORIES.income, ...TRANSACTION_CATEGORIES.expense]));
   }
   return TRANSACTION_CATEGORIES[type];
 }

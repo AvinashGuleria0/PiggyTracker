@@ -39,7 +39,7 @@ export function CategoryPieChart() {
     <div className="p-4 border-2 border-border bg-card shadow-neo">
       <h3 className="text-xl font-black mb-4 uppercase">Expenses by Category</h3>
       <div className="h-[300px] w-full">
-        <ResponsiveContainer width="100%" height="100%">
+        <ResponsiveContainer width="100%" height="100%" minWidth={0} minHeight={0}>
           <PieChart>
             <Pie
               data={data}

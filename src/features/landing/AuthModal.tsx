@@ -93,7 +93,7 @@ export const AuthModal = ({ children, defaultView = 'login' }: { children: React
 
               <div className="space-y-3">
                 <label className="font-black text-foreground text-sm uppercase">Select Role</label>
-                <div className="grid grid-cols-2 gap-3">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   <Button
                     type="button"
                     onClick={() => setLoginSelectedRole('admin')}
@@ -194,7 +194,7 @@ export const AuthModal = ({ children, defaultView = 'login' }: { children: React
               {/* Role Selection */}
               <div className="space-y-3">
                 <label className="font-black text-foreground text-sm uppercase">Select Role</label>
-                <div className="grid grid-cols-2 gap-3">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   <Button
                     type="button"
                     onClick={() => setSelectedRole('admin')}

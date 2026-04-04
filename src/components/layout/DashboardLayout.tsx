@@ -33,13 +33,13 @@ export const DashboardLayout = () => {
       {/* Mobile Sidebar Overlay */}
       {mobileMenuOpen && (
         <div 
-          className="fixed inset-0 bg-black/50 z-40 md:hidden"
+          className="fixed inset-0 bg-black/50 z-40 lg:hidden"
           onClick={() => setMobileMenuOpen(false)}
         />
       )}
       
       {/* Sidebar - responsive classes added */}
-      <div className={`fixed inset-y-0 left-0 z-50 transform ${mobileMenuOpen ? 'translate-x-0' : '-translate-x-full'} transition-all duration-300 ease-in-out md:relative md:translate-x-0 md:flex flex-col ${isSidebarCollapsed ? 'md:w-20' : 'md:w-64'}`}>
+      <div className={`fixed inset-y-0 left-0 z-50 transform ${mobileMenuOpen ? 'translate-x-0' : '-translate-x-full'} transition-all duration-300 ease-in-out lg:relative lg:translate-x-0 lg:flex flex-col ${isSidebarCollapsed ? 'lg:w-20' : 'lg:w-64'}`}>
         <Sidebar 
           onClose={() => setMobileMenuOpen(false)} 
           isCollapsed={isSidebarCollapsed}
