@@ -3,13 +3,7 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Download } from 'lucide-react';
 import { exportToCSV } from '@/utils/exportUtils';
-
-// Category mapping by type
-const categoryByType: { [key: string]: string[] } = {
-  income: ['Salary', 'Side Hustle', 'Freelance', 'Bonus', 'Investment', 'Other'],
-  expense: ['Food', 'Rent', 'Entertainment', 'Housing', 'Utilities', 'Other'],
-  all: ['Food', 'Rent', 'Salary', 'Side Hustle', 'Freelance', 'Bonus', 'Investment', 'Entertainment', 'Housing', 'Utilities', 'Other'],
-};
+import { getCategoriesByType } from '@/constants/categories';
 
 export function TransactionFilters() {
   const { filters, setFilters, transactions } = useAppStore();
@@ -19,15 +13,13 @@ export function TransactionFilters() {
   };
 
   // Get available categories based on selected type
-  const availableCategories = filters.type === 'all' 
-    ? categoryByType.all 
-    : categoryByType[filters.type] || categoryByType.all;
+  const availableCategories = getCategoriesByType(filters.type as 'income' | 'expense' | 'all');
 
   // Handle type change - reset category to "all" when type changes
   const handleTypeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const newType = e.target.value;
     setFilters({ 
-      type: newType as any,
+      type: newType as 'income' | 'expense' | 'all',
       category: 'all'
     });
   };

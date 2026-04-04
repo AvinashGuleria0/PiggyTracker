@@ -42,10 +42,10 @@ export function TransactionTable() {
           <thead className="text-xs uppercase bg-[#F3F4F6] dark:bg-[#1F2937] border-b-2 border-border font-bold text-foreground">
             <tr>
               <th className="px-6 py-4">Transaction</th>
-              <th className="px-6 py-4">Date</th>
+              <th className="px-6 py-4 hidden md:table-cell">Date</th>
               <th className="px-6 py-4">Amount</th>
-              <th className="px-6 py-4">Type</th>
-              <th className="px-6 py-4">Category</th>
+              <th className="px-6 py-4 hidden sm:table-cell">Type</th>
+              <th className="px-6 py-4 hidden md:table-cell">Category</th>
               {user?.role === 'admin' && (
                 <th className="px-6 py-4 text-right">Actions</th>
               )}
@@ -66,16 +66,16 @@ export function TransactionTable() {
               filteredData.map((t) => (
                 <tr key={t.id} className="bg-card hover:bg-muted/50 transition-colors">
                   <td className="px-6 py-4 font-black text-base">{t.title}</td>
-                  <td className="px-6 py-4 font-semibold">{formatDateTime(t.date)}</td>
+                  <td className="px-6 py-4 font-semibold hidden md:table-cell">{formatDateTime(t.date)}</td>
                   <td className={`px-6 py-4 text-xl font-black ${t.type === 'income' ? 'text-[#059669] dark:text-[#34D399]' : 'text-destructive'}`}>
                     {t.type === 'income' ? '+' : '-'}{formatCurrency(t.amount)}
                   </td>
-                  <td className="px-6 py-4">
+                  <td className="px-6 py-4 hidden sm:table-cell">
                     <Badge className={`uppercase font-bold text-xs border-2 shadow-neo-sm px-3 py-1 ${t.type === 'income' ? 'bg-[#86EFAC] text-black dark:bg-[#065F46] dark:text-[#D1FAE5]' : 'bg-[#FCA5A5] text-black dark:bg-[#7F1D1D] dark:text-[#FEE2E2]'}`}>
                       {t.type}
                     </Badge>
                   </td>
-                  <td className="px-6 py-4">
+                  <td className="px-6 py-4 hidden md:table-cell">
                     <Badge className="bg-[#E9D5FF] text-[#5B21B6] border-2 border-border font-bold text-xs shadow-neo-sm px-3 py-1 dark:bg-[#6B21A8] dark:text-[#F3E8FF]">
                       {t.category}
                     </Badge>

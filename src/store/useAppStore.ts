@@ -133,3 +133,20 @@ export const useAppStore = create<AppState>()(
     }
   )
 );
+
+// --- Transaction Selectors ---
+export const selectIncome = (state: AppState) =>
+  state.transactions
+    .filter((t) => t.type === "income")
+    .reduce((acc, t) => acc + t.amount, 0);
+
+export const selectExpense = (state: AppState) =>
+  state.transactions
+    .filter((t) => t.type === "expense")
+    .reduce((acc, t) => acc + t.amount, 0);
+
+export const selectBalance = (state: AppState) => {
+  const income = selectIncome(state);
+  const expense = selectExpense(state);
+  return income - expense;
+};

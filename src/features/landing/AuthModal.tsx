@@ -7,6 +7,7 @@ import { useAppStore } from '@/store/useAppStore';
 import { Mail, UploadCloud, User } from 'lucide-react';
 import { toast } from 'react-toastify';
 import { cn } from '@/lib/utils';
+import { validateEmail, ValidationErrors } from '@/utils/validators';
 
 export const AuthModal = ({ children, defaultView = 'login' }: { children: React.ReactNode; defaultView?: 'login' | 'signup' }) => {
   const [view, setView] = useState<'login' | 'signup'>(defaultView);
@@ -41,8 +42,8 @@ export const AuthModal = ({ children, defaultView = 'login' }: { children: React
       toast.error('Please enter your name', { className: 'border-2 border-border shadow-neo' });
       return;
     }
-    if (!signupEmail.trim()) {
-      toast.error('Please enter your email', { className: 'border-2 border-border shadow-neo' });
+    if (!validateEmail(signupEmail)) {
+      toast.error(ValidationErrors.INVALID_EMAIL, { className: 'border-2 border-border shadow-neo' });
       return;
     }
     toast.success('Account created successfully!', { className: 'border-2 border-border shadow-neo' });
@@ -92,7 +93,7 @@ export const AuthModal = ({ children, defaultView = 'login' }: { children: React
 
               <div className="space-y-3">
                 <label className="font-black text-foreground text-sm uppercase">Select Role</label>
-                <div className="grid grid-cols-2 gap-3">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   <Button
                     type="button"
                     onClick={() => setLoginSelectedRole('admin')}
@@ -193,7 +194,7 @@ export const AuthModal = ({ children, defaultView = 'login' }: { children: React
               {/* Role Selection */}
               <div className="space-y-3">
                 <label className="font-black text-foreground text-sm uppercase">Select Role</label>
-                <div className="grid grid-cols-2 gap-3">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   <Button
                     type="button"
                     onClick={() => setSelectedRole('admin')}

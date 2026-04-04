@@ -3,23 +3,19 @@ import { PiggyBank, Mail, Globe, MessageSquare, Heart } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { toast } from 'react-toastify';
+import { validateEmail, ValidationErrors } from '@/utils/validators';
 
 export const Footer = () => {
   const [email, setEmail] = useState('');
 
-  const isValidEmail = (email: string): boolean => {
-    const emailRegex = /^[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-    return emailRegex.test(email);
-  };
-
   const handleSubscribe = () => {
     if (!email.trim()) {
-      toast.error('Please enter an email address', { className: 'border-2 border-border shadow-neo' });
+      toast.error(ValidationErrors.REQUIRED_FIELD, { className: 'border-2 border-border shadow-neo' });
       return;
     }
 
-    if (!isValidEmail(email)) {
-      toast.error('Please enter a valid email address', { className: 'border-2 border-border shadow-neo' });
+    if (!validateEmail(email)) {
+      toast.error(ValidationErrors.INVALID_EMAIL, { className: 'border-2 border-border shadow-neo' });
       return;
     }
     

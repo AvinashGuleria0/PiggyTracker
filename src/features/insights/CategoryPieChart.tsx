@@ -3,9 +3,7 @@ import { useAppStore } from '@/store/useAppStore';
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip, Legend } from 'recharts';
 import { formatCurrency } from '@/utils/formatters';
 import { useTheme } from '@/components/providers/ThemeProvider';
-
-const COLORS = ['#8B5CF6', '#F472B6', '#6366F1', '#06B6D4', '#10B981', '#F97316', '#EC4899'];
-const DARK_COLORS = ['#A78BFA', '#F472B6', '#818CF8', '#22D3EE', '#34D399', '#FB923C', '#F472B6'];
+import { getChartColors } from '@/constants/colors';
 
 export function CategoryPieChart() {
   const { transactions } = useAppStore();
@@ -14,6 +12,8 @@ export function CategoryPieChart() {
   const isDark =
     theme === 'dark' ||
     (theme === 'system' && typeof window !== 'undefined' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+
+  const chartColors = getChartColors(isDark ? 'dark' : 'light');
 
   const data = useMemo(() => {
     const expenses = transactions.filter(t => t.type === 'expense');
@@ -39,7 +39,7 @@ export function CategoryPieChart() {
     <div className="p-4 border-2 border-border bg-card shadow-neo">
       <h3 className="text-xl font-black mb-4 uppercase">Expenses by Category</h3>
       <div className="h-[300px] w-full">
-        <ResponsiveContainer width="100%" height="100%">
+        <ResponsiveContainer width="100%" height="100%" minWidth={0} minHeight={0}>
           <PieChart>
             <Pie
               data={data}
@@ -53,7 +53,7 @@ export function CategoryPieChart() {
               strokeWidth={3}
             >
               {data.map((_, index) => (
-                <Cell key={`cell-${index}`} fill={(isDark ? DARK_COLORS : COLORS)[index % COLORS.length]} />
+                <Cell key={`cell-${index}`} fill={chartColors[index % chartColors.length]} />
               ))}
             </Pie>
             <Tooltip 

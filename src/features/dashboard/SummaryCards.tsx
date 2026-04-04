@@ -1,20 +1,12 @@
 import { ArrowUpCircle, ArrowDownCircle, Wallet } from 'lucide-react';
 import { NeoCard } from '@/components/shared/NeoCard';
-import { useAppStore } from '@/store/useAppStore';
+import { useAppStore, selectIncome, selectExpense, selectBalance } from '@/store/useAppStore';
 import { formatCurrency } from '@/utils/formatters';
 
 export const SummaryCards = () => {
-  const transactions = useAppStore(state => state.transactions);
-  
-  const income = transactions
-    .filter(t => t.type === 'income')
-    .reduce((acc, t) => acc + t.amount, 0);
-    
-  const expense = transactions
-    .filter(t => t.type === 'expense')
-    .reduce((acc, t) => acc + t.amount, 0);
-    
-  const balance = income - expense;
+  const income = useAppStore(selectIncome);
+  const expense = useAppStore(selectExpense);
+  const balance = useAppStore(selectBalance);
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
