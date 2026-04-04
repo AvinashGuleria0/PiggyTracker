@@ -5,6 +5,8 @@ import { Input } from '@/components/ui/input';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { toast } from 'react-toastify';
 import type { Transaction } from '@/types';
+import { getCategoriesByType } from '@/constants/categories';
+import { validateRequired, validateAmount, validateNotFutureDate, ValidationErrors } from '@/utils/validators';
 
 interface TransactionModalProps {
   isOpen: boolean;
@@ -39,10 +41,7 @@ export function TransactionModal({ isOpen, onClose, transaction }: TransactionMo
     type: transaction?.type || 'expense',
   });
 
-  const expenseCategories = ['Food', 'Rent', 'Entertainment', 'Housing', 'Utilities', 'Other'];
-  const incomeCategories = ['Salary', 'Side Hustle', 'Freelance', 'Bonus', 'Investment', 'Other'];
-  
-  const categories = formData.type === 'income' ? incomeCategories : expenseCategories;
+  const categories = getCategoriesByType(formData.type as 'income' | 'expense');
   
   // Get today's datetime in IST for the datetime-local max attribute
   const getTodayDatetime = () => {
@@ -56,8 +55,13 @@ export function TransactionModal({ isOpen, onClose, transaction }: TransactionMo
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     
-    if (!formData.title || !formData.amount) {
-      toast.error('Title and Amount are required.', { className: 'border-2 border-border shadow-neo' });
+    if (!validateRequired(formData.title)) {
+      toast.error(ValidationErrors.REQUIRED_FIELD, { className: 'border-2 border-border shadow-neo' });
+      return;
+    }
+
+    if (!validateAmount(formData.amount)) {
+      toast.error(ValidationErrors.INVALID_AMOUNT, { className: 'border-2 border-border shadow-neo' });
       return;
     }
 
@@ -74,8 +78,8 @@ export function TransactionModal({ isOpen, onClose, transaction }: TransactionMo
     const utcDate = new Date(istDate.getTime() - istOffsetMs);
     
     // Validate that the datetime is not in the future
-    if (utcDate > new Date()) {
-      toast.error('Cannot add transactions for future dates/times.', { className: 'border-2 border-border shadow-neo' });
+    if (!validateNotFutureDate(utcDate)) {
+      toast.error(ValidationErrors.FUTURE_DATE, { className: 'border-2 border-border shadow-neo' });
       return;
     }
 
@@ -143,7 +147,7 @@ export function TransactionModal({ isOpen, onClose, transaction }: TransactionMo
                 value={formData.type}
                 onChange={e => {
                   const newType = e.target.value as 'income' | 'expense';
-                  const newCategories = newType === 'income' ? incomeCategories : expenseCategories;
+                  const newCategories = getCategoriesByType(newType);
                   setFormData({...formData, type: newType, category: newCategories[0]});
                 }}
               >
