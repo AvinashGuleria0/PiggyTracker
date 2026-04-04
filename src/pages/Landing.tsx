@@ -105,7 +105,7 @@ export default function Landing() {
                     Go to Dashboard
                   </Button>
                 ) : (
-                  <AuthModal>
+                  <AuthModal defaultView="signup">
                     <Button size="lg" className="h-16 px-10 text-xl font-black bg-[#3F6FE6] dark:bg-[#3F5D80] text-white hover:bg-[#335ECC] dark:hover:bg-[#4C6F99] w-full sm:w-64 shadow-neo active:shadow-none border-2 border-border transition-all">
                       Get Started Now
                     </Button>
