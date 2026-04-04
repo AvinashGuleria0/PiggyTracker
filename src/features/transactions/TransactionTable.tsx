@@ -6,7 +6,7 @@ import { EmptyState } from '@/components/shared/EmptyState';
 import { TransactionModal } from './TransactionModal';
 import { toast } from 'react-toastify';
 import { FileWarning, Trash, Edit } from 'lucide-react';
-import { formatCurrency, formatDate } from '@/utils/formatters';
+import { formatCurrency, formatDateTime } from '@/utils/formatters';
 import type { Transaction } from '@/types';
 
 export function TransactionTable() {
@@ -66,7 +66,7 @@ export function TransactionTable() {
               filteredData.map((t) => (
                 <tr key={t.id} className="bg-card hover:bg-muted/50 transition-colors">
                   <td className="px-6 py-4 font-black text-base">{t.title}</td>
-                  <td className="px-6 py-4 font-semibold">{formatDate(t.date)}</td>
+                  <td className="px-6 py-4 font-semibold">{formatDateTime(t.date)}</td>
                   <td className={`px-6 py-4 text-xl font-black ${t.type === 'income' ? 'text-[#059669] dark:text-[#34D399]' : 'text-destructive'}`}>
                     {t.type === 'income' ? '+' : '-'}{formatCurrency(t.amount)}
                   </td>

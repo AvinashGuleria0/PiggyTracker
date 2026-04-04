@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { useAppStore } from '@/store/useAppStore';
-import { formatCurrency, formatDate } from '@/utils/formatters';
+import { formatCurrency, formatDateTime } from '@/utils/formatters';
 import { NeoCard } from '@/components/shared/NeoCard';
 import { Badge } from '@/components/ui/badge';
 import { cn } from '@/lib/utils';
@@ -58,7 +58,7 @@ export const RecentTransactions = () => {
                   <div className="min-w-0">
                      <p className="font-black text-base truncate max-w-full leading-tight" title={tx.title}>{tx.title}</p>
                      <p className="text-xs text-muted-foreground font-bold mt-1 truncate">
-                        {formatDate(tx.date)}
+                        {formatDateTime(tx.date)}
                      </p>
                   </div>
                 </div>

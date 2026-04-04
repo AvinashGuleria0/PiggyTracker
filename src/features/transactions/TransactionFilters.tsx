@@ -4,11 +4,32 @@ import { Button } from '@/components/ui/button';
 import { Download } from 'lucide-react';
 import { exportToCSV } from '@/utils/exportUtils';
 
+// Category mapping by type
+const categoryByType: { [key: string]: string[] } = {
+  income: ['Salary', 'Side Hustle', 'Freelance', 'Bonus', 'Investment', 'Other'],
+  expense: ['Food', 'Rent', 'Entertainment', 'Housing', 'Utilities', 'Other'],
+  all: ['Food', 'Rent', 'Salary', 'Side Hustle', 'Freelance', 'Bonus', 'Investment', 'Entertainment', 'Housing', 'Utilities', 'Other'],
+};
+
 export function TransactionFilters() {
   const { filters, setFilters, transactions } = useAppStore();
 
   const handleExport = () => {
     exportToCSV(transactions);
+  };
+
+  // Get available categories based on selected type
+  const availableCategories = filters.type === 'all' 
+    ? categoryByType.all 
+    : categoryByType[filters.type] || categoryByType.all;
+
+  // Handle type change - reset category to "all" when type changes
+  const handleTypeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const newType = e.target.value;
+    setFilters({ 
+      type: newType as any,
+      category: 'all'
+    });
   };
 
   return (
@@ -22,11 +43,11 @@ export function TransactionFilters() {
         />
       </div>
       
-      <div className="flex flex-wrap sm:flex-nowrap gap-2 sm:gap-4 w-full md:w-auto">
+      <div className="flex flex-col sm:flex-row gap-2 sm:gap-4 w-full md:w-auto">
         <select 
-          className="flex-1 sm:flex-none h-11 border-2 border-border bg-card text-foreground px-2 sm:px-4 py-2 text-xs sm:text-sm font-bold shadow-neo-sm focus-visible:outline-none focus-visible:ring-0 uppercase tracking-wide w-full"
+          className="h-11 border-2 border-border bg-card text-foreground px-2 sm:px-4 py-2 text-xs sm:text-sm font-bold shadow-neo-sm focus-visible:outline-none focus-visible:ring-0 uppercase tracking-wide w-full sm:w-[160px] md:w-[200px]"
           value={filters.type}
-          onChange={(e) => setFilters({ type: e.target.value as any })}
+          onChange={handleTypeChange}
         >
           <option value="all">All Types</option>
           <option value="income">Income</option>
@@ -34,21 +55,17 @@ export function TransactionFilters() {
         </select>
         
         <select 
-          className="flex-1 sm:flex-none h-11 border-2 border-border bg-card text-foreground px-2 sm:px-4 py-2 text-xs sm:text-sm font-bold shadow-neo-sm focus-visible:outline-none focus-visible:ring-0 uppercase tracking-wide w-full"
+          className="h-11 border-2 border-border bg-card text-foreground px-2 sm:px-4 py-2 text-xs sm:text-sm font-bold shadow-neo-sm focus-visible:outline-none focus-visible:ring-0 uppercase tracking-wide w-full sm:w-[160px] md:w-[200px]"
           value={filters.category}
           onChange={(e) => setFilters({ category: e.target.value })}
         >
           <option value="all">All Categories</option>
-          <option value="Food">Food</option>
-          <option value="Rent">Rent</option>
-          <option value="Salary">Salary</option>
-          <option value="Entertainment">Entertainment</option>
-          <option value="Housing">Housing</option>
-          <option value="Side Hustle">Side Hustle</option>
-          <option value="Other">Other</option>
+          {availableCategories.map((cat) => (
+            <option key={cat} value={cat}>{cat}</option>
+          ))}
         </select>
         
-        <Button onClick={handleExport} className="w-full sm:w-auto gap-2 font-black uppercase tracking-wider shadow-neo-sm border-2 border-border mt-2 sm:mt-0 h-11">
+        <Button onClick={handleExport} className="w-full sm:w-auto gap-2 font-black uppercase tracking-wider shadow-neo-sm border-2 border-border h-11">
           <Download className="w-4 h-4" />
           <span className="inline">Export</span>
         </Button>

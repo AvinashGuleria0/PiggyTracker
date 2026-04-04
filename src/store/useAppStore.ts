@@ -31,7 +31,8 @@ const initialTransactions: Transaction[] = [
     amount: 3500,
     type: "income",
     category: "Salary",
-    date: new Date(Date.now() - 1000 * 60 * 60 * 24 * 10).toISOString(), // 10 days ago
+    // 25 Mar 2026 at 2:00 PM IST (08:30 UTC)
+    date: new Date(Date.UTC(2026, 2, 25, 8, 30, 0)).toISOString(),
   },
   {
     id: "2",
@@ -39,7 +40,8 @@ const initialTransactions: Transaction[] = [
     amount: 125.50,
     type: "expense",
     category: "Food",
-    date: new Date(Date.now() - 1000 * 60 * 60 * 24 * 5).toISOString(), // 5 days ago
+    // 30 Mar 2026 at 5:15 AM IST (23:45 UTC previous day)
+    date: new Date(Date.UTC(2026, 2, 29, 23, 45, 0)).toISOString(),
   },
   {
     id: "3",
@@ -47,7 +49,8 @@ const initialTransactions: Transaction[] = [
     amount: 15.99,
     type: "expense",
     category: "Entertainment",
-    date: new Date(Date.now() - 1000 * 60 * 60 * 24 * 2).toISOString(), // 2 days ago
+    // 2 Apr 2026 at 11:45 PM IST (18:15 UTC)
+    date: new Date(Date.UTC(2026, 3, 2, 18, 15, 0)).toISOString(),
   },
   {
     id: "4",
@@ -55,7 +58,8 @@ const initialTransactions: Transaction[] = [
     amount: 1200,
     type: "expense",
     category: "Housing",
-    date: new Date(Date.now() - 1000 * 60 * 60 * 24 * 1.5).toISOString(), // 1.5 days ago
+    // 3 Apr 2026 at 7:30 AM IST (02:00 UTC)
+    date: new Date(Date.UTC(2026, 3, 3, 2, 0, 0)).toISOString(),
   },
   {
     id: "5",
@@ -63,7 +67,8 @@ const initialTransactions: Transaction[] = [
     amount: 850,
     type: "income",
     category: "Side Hustle",
-    date: new Date().toISOString(), // Today
+    // 4 Apr 2026 at 6:00 PM IST (12:30 UTC)
+    date: new Date(Date.UTC(2026, 3, 4, 12, 30, 0)).toISOString(),
   },
 ];
 
