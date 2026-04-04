@@ -31,7 +31,7 @@ export const RecentTransactions = () => {
       <NeoCard className="p-6 flex flex-col min-h-[400px] h-full bg-card">
         <div className="flex items-center justify-between mb-6 border-b-2 border-border pb-4">
           <h3 className="text-xl font-black uppercase tracking-wide">Recent Activity</h3>
-          <Button render={<NavLink to="/dashboard/transactions" />} variant="outline" size="icon-sm" className="hidden sm:flex border-2 shadow-neo-sm">
+          <Button nativeButton={false} render={<NavLink to="/dashboard/transactions" />} variant="outline" size="icon-sm" className="hidden sm:flex border-2 shadow-neo-sm">
             <ExternalLink size={18} />
           </Button>
         </div>
